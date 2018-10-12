@@ -42,6 +42,7 @@ void Sort::sortAlgorithm1()
 void Sort::sortAlgorithm2()
 {
 	//todo
+	//try to do something!!!!
 }
 
 
