@@ -3,14 +3,11 @@
 #include <iostream>
 #include <istream> 
 #include <vector>
-<<<<<<< HEAD
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
-=======
 #include <stdio.h> 
 #include <math.h> 
 
->>>>>>> master
 using namespace std;
 
 void PrintResult()
@@ -45,7 +42,7 @@ void InsertSizeOfArray(int *sizeOfArray)
 	*sizeOfArray = tmpSize;
 }
 
-<<<<<<< HEAD
+
 void FillArray(vector<int> *sortingArray, int *sizeOfArray)
 {
 	int value;
@@ -61,15 +58,7 @@ void FillArray(vector<int> *sortingArray, int *sizeOfArray)
 	}
 }
 
-void InsertionSort()
-{
-
-}
-
 void QuickSort(vector<int> *sortingArray,int firstElement, int lastElement)
-=======
-void QuickSort()
->>>>>>> master
 {
 
 

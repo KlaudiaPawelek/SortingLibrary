@@ -1,7 +1,4 @@
 ﻿  main.cpp
-<<<<<<< HEAD
-c:\users\klaud\documents\github\sortinglibrary\sortinglibrary\sortinglibrary\main.cpp(25): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\klaud\documents\github\sortinglibrary\sortinglibrary\sortinglibrary\main.cpp(50): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  LINK : C:\Users\klaud\Documents\GitHub\SortingLibrary\SortingLibrary\Debug\SortingLibrary.exe not found or not built by the last incremental link; performing full link
   SortingLibrary.vcxproj -> C:\Users\klaud\Documents\GitHub\SortingLibrary\SortingLibrary\Debug\SortingLibrary.exe
-=======
-  SortingLibrary.vcxproj -> D:\Documents\s.soumaille\Documents\GitHub\SortingLibrary\SortingLibrary\Debug\SortingLibrary.exe
->>>>>>> master
