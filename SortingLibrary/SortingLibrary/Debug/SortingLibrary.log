@@ -1,5 +1,2 @@
-﻿  Sort.cpp
-z:\profiledata\s297163\documents\github\sortinglibrary\sortinglibrary\sortinglibrary\sort.cpp(20): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  maincpp.cpp
-  Generating Code...
-  SortingLibrary.vcxproj -> Z:\ProfileData\s297163\Documents\GitHub\SortingLibrary\SortingLibrary\Debug\SortingLibrary.exe
+﻿  main.cpp
+  SortingLibrary.vcxproj -> C:\Users\klaud\Documents\GitHub\SortingLibrary\SortingLibrary\Debug\SortingLibrary.exe
