@@ -46,21 +46,59 @@ void InsertSizeOfArray(int *sizeOfArray)
 void FillArray(vector<int> *sortingArray, int *sizeOfArray)
 {
 	int value;
-	/* initialize random seed: */
+	//initialize random seed
 	srand(time(NULL));
 
 
 	for (int n = 0; n < *sizeOfArray; n++)
 	{
-		/* generate secret number between 1 and 10: */
+		//generate secret number between 1 and 100
 		value = rand() % 100 + 1;
 		(*sortingArray)[n] = value;
 	}
 }
 
-void QuickSort(vector<int> *sortingArray,int firstElement, int lastElement)
+int Partition(vector<int> &sortingArray, int low, int high)
 {
+	int pivot = sortingArray[low];
+	int from_left = low + 1;
+	int from_right = high;
+	int tmp;
 
+	while (from_left != from_right) {
+		if (sortingArray[from_left] <= pivot) from_left++;
+		else {
+			while ((from_left != from_right) && (pivot < sortingArray[from_right]))
+			{
+				from_right--;
+			}
+
+			//swap
+			tmp = sortingArray[from_right];
+			sortingArray[from_right] = sortingArray[from_left];
+			sortingArray[from_left] = tmp;
+		}
+	}
+
+	if (sortingArray[from_left] > pivot) 
+		from_left--;
+	sortingArray[low] = sortingArray[from_left];
+	sortingArray[from_left] = pivot;
+
+	return (from_left);
+}
+
+void QuickSort(vector<int> &sortingArray,int low, int high)
+{
+	if (low < high)
+	{
+		int pi = Partition(sortingArray, low, high);
+
+		// Separately sort elements before 
+		// partition and after partition 
+		QuickSort(sortingArray, low, pi - 1);
+		QuickSort(sortingArray, pi + 1, high);
+	}
 
 }
 
@@ -76,9 +114,9 @@ int main()
 	FillArray(&sortingArray, &sizeOfArray);
 
 	//Quick Sort
-	//int firstElement = sortingArray.begin;
-	//int lastElement = sortingArray.end;
-	//QuickSort(sortingArray, firstElement, lastElement);
+	int firstElement = 0;
+	int lastElement = sizeOfArray-1;
+	QuickSort(sortingArray, firstElement, lastElement);
 
 	cout << endl;
 	return 0;
