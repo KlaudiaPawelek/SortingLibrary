@@ -10,20 +10,14 @@
 
 using namespace std;
 
-void PrintResult()
 {
-	
 }
-/* Function to sort an array using insertion sort*/
-void insertionSort(vector<int> *V, int n)
 {
 	int i, key, j;
-	for (i = 1; i < n; i++)
 	{
 		key = (*V)[i];
 		j = i - 1;
 
-		/* Move elements of arr[0..i-1], that are
 		   greater than key, to one position ahead
 		   of their current position */
 		while (j >= 0 && (*V)[j] > key)
@@ -52,14 +46,20 @@ void FillArray(vector<int> *sortingArray, int *sizeOfArray)
 
 	for (int n = 0; n < *sizeOfArray; n++)
 	{
+<<<<<<< HEAD
 		//generate secret number between 1 and 100
+=======
+>>>>>>> master
 		value = rand() % 100 + 1;
 		(*sortingArray)[n] = value;
 	}
 }
+// Quick sort is too easy for you Klaudia
+
 
 int Partition(vector<int> &sortingArray, int low, int high)
 {
+<<<<<<< HEAD
 	int pivot = sortingArray[low];
 	int from_left = low + 1;
 	int from_right = high;
@@ -99,6 +99,9 @@ void QuickSort(vector<int> &sortingArray,int low, int high)
 		QuickSort(sortingArray, low, pi - 1);
 		QuickSort(sortingArray, pi + 1, high);
 	}
+=======
+	
+>>>>>>> master
 
 }
 
