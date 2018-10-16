@@ -4,8 +4,6 @@ Sorting algorithm:
 2. Quick sort
 Vectors are used to storing values.
 */
-
-
 #include <iostream>
 #include <iomanip>       /*setw, setfill*/
 #include <istream> 
@@ -14,6 +12,7 @@ Vectors are used to storing values.
 #include <time.h>       /* time */
 #include <stdio.h> 
 #include <math.h> 
+#include <exception>
 
 using namespace std;
 
@@ -50,12 +49,13 @@ void insertionSort(vector<int> *sortingArray, int *sizeOfArray)
 /*Function that asks the user about the size of the vector/array*/
 void InsertSizeOfArray(int *sizeOfArray)
 {
-	int tmpSize = 0;
-	cout << "Insert the size of the array: \n";
 	/*The user enters an integer*/
-	cout << "Insert size of the input sequence: ";
+	int tmpSize = 0;
+	cout << "Insert the size of the array: ";
 	cin >> tmpSize;
 	*sizeOfArray = tmpSize;
+	
+	
 }
 
 /*Function that fill array (vector) with random numbers */
@@ -70,6 +70,36 @@ void FillArray(vector<int> *sortingArray, int *sizeOfArray)
 		value = rand() % 100 + 1;
 		(*sortingArray)[n] = value;
 	}
+}
+
+/* Initialization of index array: from 0 to sizeOfArray */
+void FillIndexArray(vector<int> *indexArray, int *sizeOfArray)
+{
+	for (int i = 0; i < *sizeOfArray; i++)
+	{
+		(*indexArray)[i] = i;
+	}
+}
+
+/* Update index array after sorting  */
+void GetIndexFromSortedArray(vector<int> *tmpArray, vector<int> *sortingArray, vector<int> *indexArray)
+{
+	vector<int> indexes((*sortingArray).size());
+	for (int i = 0; i < (*sortingArray).size(); i++) 
+	{
+		for (int j = 0; j < (*sortingArray).size(); j++)
+		{
+			//if elements are the same, update index
+			if ((*tmpArray)[j] == (*sortingArray)[i])
+			{
+				indexes[i] = j;
+				break;
+			}
+		}
+	}
+
+	*indexArray = indexes;
+	
 }
 
 /*Partition method - this is important part of quicksort method*/
@@ -129,36 +159,59 @@ int main()
 {
 	/* INSERTION SORT */
 	cout << "Insertion sort \n";
-	//Create first array
+	//Create arrays for insertion sort
 	int sizeOfArray = 0;
 	InsertSizeOfArray(&sizeOfArray);
-	vector<int> sortingArray(sizeOfArray);
+	vector<int> sortingArray(sizeOfArray);	//array for sorted values
+	vector<int> tmpArray(sizeOfArray);		//temporary array for unsorted values
+	vector<int> indexArray(sizeOfArray);	//array for indexes
 
 	//Fill first array
 	FillArray(&sortingArray, &sizeOfArray);
+	PrintResult(&sortingArray);
+	tmpArray = sortingArray;
+	//Print indexes
+	FillIndexArray(&indexArray,&sizeOfArray);
+	PrintResult(&indexArray);
+
+	cout << endl;
 
 	//Insertion Sort for first array
 	insertionSort(&sortingArray, &sizeOfArray);
 	PrintResult(&sortingArray);
+	//Print indexes
+	GetIndexFromSortedArray(&tmpArray, &sortingArray,&indexArray);
+	PrintResult(&indexArray);
 
 
 
 	/* QUICKSORT */
 	cout << "\nQuick sort \n";
 
-	//Create second array
+	//Create arrays for quicksort
 	int sizeOfArray2 = 0;
 	InsertSizeOfArray(&sizeOfArray2);
-	vector<int> sortingArray2(sizeOfArray2);
+	vector<int> sortingArray2(sizeOfArray2);//array for sorted values
+	vector<int> tmpArray2(sizeOfArray2);		//temporary array for unsorted values
+	vector<int> indexArray2(sizeOfArray2);	//array for indexes
 
 	//Fill second array
 	FillArray(&sortingArray2, &sizeOfArray2);
+	PrintResult(&sortingArray2);
+	tmpArray2 = sortingArray2;
+
+	//Print indexes
+	FillIndexArray(&indexArray2, &sizeOfArray2);
+	PrintResult(&indexArray2);
+
+	cout << endl;
 
 	//Quick Sort
-	int firstElement2 = 0;
-	int lastElement2 = sizeOfArray2-1;
-	QuickSort(sortingArray2, firstElement2, lastElement2);
+	QuickSort(sortingArray2, 0, sizeOfArray2-1);
 	PrintResult(&sortingArray2);
+	//Print indexes
+	GetIndexFromSortedArray(&tmpArray2, &sortingArray2, &indexArray2);
+	PrintResult(&indexArray2);
 
 	cout << endl;
 	return 0;
