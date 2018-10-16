@@ -51,10 +51,7 @@ void insertionSort(vector<int> *sortingArray, int *sizeOfArray)
 void InsertSizeOfArray(int *sizeOfArray)
 {
 	int tmpSize = 0;
-<<<<<<< HEAD
 	cout << "Insert the size of the array: \n";
-=======
->>>>>>> Klaudia
 	/*The user enters an integer*/
 	cout << "Insert size of the input sequence: ";
 	cin >> tmpSize;
@@ -67,10 +64,6 @@ void FillArray(vector<int> *sortingArray, int *sizeOfArray)
 	int value = 0;
 	//initialize random seed
 	srand(time(NULL));
-<<<<<<< HEAD
-=======
-
->>>>>>> Klaudia
 	for (int n = 0; n < *sizeOfArray; n++)
 	{
 		//generate secret number between 1 and 100
