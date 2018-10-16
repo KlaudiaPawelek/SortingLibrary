@@ -1,4 +1,10 @@
-// C++ program for sorting values
+/* C++ program for sorting values
+Sorting algorithm:
+1. Insertion sort
+2. Quick sort
+Vectors are used to storing values.
+*/
+
 
 #include <iostream>
 #include <iomanip>       /*setw, setfill*/
@@ -12,51 +18,51 @@
 using namespace std;
 
 /* Function to print the vector*/
-void PrintResult(vector<int> *V)
+void PrintResult(vector<int> *sortingArray)
 {
 	int width = 4;
-	for (unsigned int i = 0; i < (*V).size(); i++) {
-		cout << left << setw(width) << setfill(' ') << (*V)[i];
+	for (unsigned int i = 0; i < (*sortingArray).size(); i++) 
+	{
+		cout << left << setw(width) << setfill(' ') << (*sortingArray)[i];
 	}
 	cout << endl;
 }
 /* Function to sort a vector using insertion sort*/
-void insertionSort(vector<int> *V, int *n)
+void insertionSort(vector<int> *sortingArray, int *sizeOfArray)
 {
-	int i, key, j;
-	for (i = 1; i < *n; i++)
+	int i, key, j = 0;
+	for (i = 1; i < *sizeOfArray; i++)
 	{
-		key = (*V)[i];
+		key = (*sortingArray)[i];
 		j = i - 1;
 
 		/* Move elements of Vector[0..i-1], that are
 		   greater than key, to one position ahead
 		   of their current position */
-		while (j >= 0 && (*V)[j] > key)
+		while (j >= 0 && (*sortingArray)[j] > key)
 		{
-			(*V)[j + 1] = (*V)[j];
+			(*sortingArray)[j + 1] = (*sortingArray)[j];
 			j = j - 1;
 		}
-		(*V)[j + 1] = key;
+		(*sortingArray)[j + 1] = key;
 	}
 }
 /*Function that asks the user about the size of the vector/array*/
 void InsertSizeOfArray(int *sizeOfArray)
 {
 	int tmpSize = 0;
-	cout << "Insert size of the input sequence: ";
 	/*The user enters an integer*/
+	cout << "Insert size of the input sequence: ";
 	cin >> tmpSize;
 	*sizeOfArray = tmpSize;
 }
 
-
+/*Function that fill array (vector) with random numbers */
 void FillArray(vector<int> *sortingArray, int *sizeOfArray)
 {
-	int value;
+	int value = 0;
 	//initialize random seed
 	srand(time(NULL));
-
 
 	for (int n = 0; n < *sizeOfArray; n++)
 	{
@@ -66,37 +72,45 @@ void FillArray(vector<int> *sortingArray, int *sizeOfArray)
 	}
 }
 
-// Quick sort is too easy for you Klaudia
+/*Partition method - this is important part of quicksort method*/
 int Partition(vector<int> &sortingArray, int low, int high)
 {
 	int pivot = sortingArray[low];
-	int from_left = low + 1;
-	int from_right = high;
-	int tmp;
+	int fromLeft = low + 1;
+	int fromRight = high;
+	int tmp = 0;
 
-	while (from_left != from_right) {
-		if (sortingArray[from_left] <= pivot) from_left++;
-		else {
-			while ((from_left != from_right) && (pivot < sortingArray[from_right]))
+	while (fromLeft != fromRight)
+	{
+		if (sortingArray[fromLeft] <= pivot) 
+		{
+			fromLeft++;
+		}
+		else 
+		{
+			while ((fromLeft != fromRight) && (pivot < sortingArray[fromRight]))
 			{
-				from_right--;
+				fromRight--;
 			}
 
 			//swap
-			tmp = sortingArray[from_right];
-			sortingArray[from_right] = sortingArray[from_left];
-			sortingArray[from_left] = tmp;
+			tmp = sortingArray[fromRight];
+			sortingArray[fromRight] = sortingArray[fromLeft];
+			sortingArray[fromLeft] = tmp;
 		}
 	}
 
-	if (sortingArray[from_left] > pivot) 
-		from_left--;
-	sortingArray[low] = sortingArray[from_left];
-	sortingArray[from_left] = pivot;
+	if (sortingArray[fromLeft] > pivot)
+	{
+		fromLeft--;
+	}
+	sortingArray[low] = sortingArray[fromLeft];
+	sortingArray[fromLeft] = pivot;
 
-	return (from_left);
+	return (fromLeft);
 }
 
+/*Quicksort - main method, which used Partition method and recursion*/
 void QuickSort(vector<int> &sortingArray,int low, int high)
 {
 	if (low < high)
@@ -113,6 +127,7 @@ void QuickSort(vector<int> &sortingArray,int low, int high)
 
 int main()
 {
+	/* INSERTION SORT */
 	cout << "Insertion sort \n";
 	//Create first array
 	int sizeOfArray = 0;
@@ -126,6 +141,9 @@ int main()
 	insertionSort(&sortingArray, &sizeOfArray);
 	PrintResult(&sortingArray);
 
+
+
+	/* QUICKSORT */
 	cout << "\nQuick sort \n";
 
 	//Create second array
