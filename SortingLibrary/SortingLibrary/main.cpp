@@ -13,14 +13,16 @@ Vectors are used to storing values.
 #include <stdio.h> 
 #include <math.h> 
 #include <exception>
+<<<<<<< HEAD
 #include <ctime>
+=======
+>>>>>>> master
 
 using namespace std;
 
 /* Function to print the vector*/
 void PrintResult(vector<int> *sortingArray)
 {
-	int width = 4;
 	for (unsigned int i = 0; i < (*sortingArray).size(); i++) 
 	{
 		cout << left << setw(width) << setfill(' ') << (*sortingArray)[i];
@@ -36,9 +38,6 @@ void insertionSort(vector<int> *sortingArray, int *sizeOfArray)
 		key = (*sortingArray)[i];
 		j = i - 1;
 
-		/* Move elements of Vector[0..i-1], that are
-		   greater than key, to one position ahead
-		   of their current position */
 		while (j >= 0 && (*sortingArray)[j] > key)
 		{
 			(*sortingArray)[j + 1] = (*sortingArray)[j];
@@ -50,13 +49,7 @@ void insertionSort(vector<int> *sortingArray, int *sizeOfArray)
 /*Function that asks the user about the size of the vector/array*/
 void InsertSizeOfArray(int *sizeOfArray)
 {
-	/*The user enters an integer*/
-	int tmpSize = 0;
 	cout << "Insert the size of the array: ";
-	cin >> tmpSize;
-	*sizeOfArray = tmpSize;
-	
-	
 }
 
 /*Function that fill array (vector) with random numbers */
@@ -147,7 +140,6 @@ void QuickSort(vector<int> &sortingArray,int low, int high)
 	if (low < high)
 	{
 		int pi = Partition(sortingArray, low, high);
-
 		// Separately sort elements before 
 		// partition and after partition 
 		QuickSort(sortingArray, low, pi - 1);
@@ -189,7 +181,6 @@ int main()
 	GetIndexFromSortedArray(&tmpArray, &sortingArray,&indexArray);
 	PrintResult(&indexArray);
 	cout << "Elapsed time: " << setprecision(10) << elapsed_secs * 1.0e-6 << "sec\n";
-
 
 
 	/* QUICKSORT */
