@@ -13,6 +13,7 @@ Vectors are used to storing values.
 #include <stdio.h> 
 #include <math.h> 
 #include <exception>
+#include <ctime>
 
 using namespace std;
 
@@ -177,11 +178,17 @@ int main()
 	cout << endl;
 
 	//Insertion Sort for first array
+	clock_t begin = clock();
+
 	insertionSort(&sortingArray, &sizeOfArray);
+	
+	clock_t end = clock();
+	double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
 	PrintResult(&sortingArray);
 	//Print indexes
 	GetIndexFromSortedArray(&tmpArray, &sortingArray,&indexArray);
 	PrintResult(&indexArray);
+	cout << "Elapsed time: " << setprecision(10) << elapsed_secs * 1.0e-6 << "sec\n";
 
 
 
@@ -207,11 +214,17 @@ int main()
 	cout << endl;
 
 	//Quick Sort
+	clock_t begin2 = clock();
+
 	QuickSort(sortingArray2, 0, sizeOfArray2-1);
+
+	clock_t end2 = clock();
+	double elapsed_secs2 = double(end2 - begin2) / CLOCKS_PER_SEC;
 	PrintResult(&sortingArray2);
 	//Print indexes
 	GetIndexFromSortedArray(&tmpArray2, &sortingArray2, &indexArray2);
 	PrintResult(&indexArray2);
+	cout << "Elapsed time: " << setprecision(10) << elapsed_secs2 * 1.0e-6 << "sec\n";
 
 	cout << endl;
 	return 0;
