@@ -1,5 +1,6 @@
 ﻿  main.cpp
-c:\users\klaud\documents\github\sortinglibrary\sortinglibrary\sortinglibrary\main.cpp(66): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\klaud\documents\github\sortinglibrary\sortinglibrary\sortinglibrary\main.cpp(88): warning C4018: '<': signed/unsigned mismatch
-c:\users\klaud\documents\github\sortinglibrary\sortinglibrary\sortinglibrary\main.cpp(90): warning C4018: '<': signed/unsigned mismatch
-  SortingLibrary.vcxproj -> C:\Users\klaud\Documents\GitHub\SortingLibrary\SortingLibrary\Debug\SortingLibrary.exe
+d:\documents\s.soumaille\documents\github\sortinglibrary\sortinglibrary\sortinglibrary\main.cpp(25): warning C4018: '<' : incompatibilité signed/unsigned
+d:\documents\s.soumaille\documents\github\sortinglibrary\sortinglibrary\sortinglibrary\main.cpp(92): warning C4244: 'argument' : conversion de 'time_t' en 'unsigned int', perte possible de données
+d:\documents\s.soumaille\documents\github\sortinglibrary\sortinglibrary\sortinglibrary\main.cpp(114): warning C4018: '<' : incompatibilité signed/unsigned
+d:\documents\s.soumaille\documents\github\sortinglibrary\sortinglibrary\sortinglibrary\main.cpp(116): warning C4018: '<' : incompatibilité signed/unsigned
+  SortingLibrary.vcxproj -> D:\Documents\s.soumaille\Documents\GitHub\SortingLibrary\SortingLibrary\Debug\SortingLibrary.exe

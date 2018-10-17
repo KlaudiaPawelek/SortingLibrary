@@ -13,13 +13,34 @@ Vectors are used to storing values.
 #include <stdio.h> 
 #include <math.h> 
 #include <exception>
+#include <string>
 
 using namespace std;
 
+/*Function that test if the user input is integer*/
+int IsInteger(string input) 
+{
+	int bad = 0;
+	//loop of the size of the input
+	for (int i = 0; i < input.size(); i++)
+	{
+		if (!isdigit(input[i]) && input[i] != '.')
+			return 0;
+		if (input[i] == '.')
+			bad++;
+		if (input[i] == '-')
+			bad++;
+	}
+	//check if bad contains something
+	if (bad)
+		return 0;
+	//return 1 == true
+	return 1;
+}
 /* Function to print the vector*/
 void PrintResult(vector<int> *sortingArray)
 {
-	int width = 4;
+	int width = 6;
 	for (unsigned int i = 0; i < (*sortingArray).size(); i++) 
 	{
 		cout << left << setw(width) << setfill(' ') << (*sortingArray)[i];
@@ -35,9 +56,9 @@ void insertionSort(vector<int> *sortingArray, int *sizeOfArray)
 		key = (*sortingArray)[i];
 		j = i - 1;
 
-		/* Move elements of Vector[0..i-1], that are
-		   greater than key, to one position ahead
-		   of their current position */
+		// Move elements of Vector[0..i-1], that are
+		// greater than key, to one position ahead
+		// of their current position
 		while (j >= 0 && (*sortingArray)[j] > key)
 		{
 			(*sortingArray)[j + 1] = (*sortingArray)[j];
@@ -49,13 +70,18 @@ void insertionSort(vector<int> *sortingArray, int *sizeOfArray)
 /*Function that asks the user about the size of the vector/array*/
 void InsertSizeOfArray(int *sizeOfArray)
 {
-	/*The user enters an integer*/
-	int tmpSize = 0;
+	// The user enters an integer converting in string to check 
+	// if the user does not input a wrong input
+	string tmpSize;
 	cout << "Insert the size of the array: ";
-	cin >> tmpSize;
-	*sizeOfArray = tmpSize;
-	
-	
+	getline(cin, tmpSize);
+	while (!IsInteger(tmpSize))
+	{	
+		cout << "Wrong input!" << endl;
+		cout << "Insert the size of the array: ";
+		getline(cin, tmpSize);
+	}
+	*sizeOfArray = stoi(tmpSize);
 }
 
 /*Function that fill array (vector) with random numbers */
@@ -146,7 +172,6 @@ void QuickSort(vector<int> &sortingArray,int low, int high)
 	if (low < high)
 	{
 		int pi = Partition(sortingArray, low, high);
-
 		// Separately sort elements before 
 		// partition and after partition 
 		QuickSort(sortingArray, low, pi - 1);
@@ -182,7 +207,6 @@ int main()
 	//Print indexes
 	GetIndexFromSortedArray(&tmpArray, &sortingArray,&indexArray);
 	PrintResult(&indexArray);
-
 
 
 	/* QUICKSORT */
