@@ -13,11 +13,8 @@ Vectors are used to storing values.
 #include <stdio.h> 
 #include <math.h> 
 #include <exception>
-<<<<<<< HEAD
 #include <ctime>
-=======
 #include <string>
->>>>>>> master
 
 using namespace std;
 
