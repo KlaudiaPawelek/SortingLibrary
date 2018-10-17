@@ -15,6 +15,8 @@ Vectors are used to storing values.
 #include <exception>
 #include <ctime>
 #include <string>
+#include <algorithm>
+#include <numeric>
 
 using namespace std;
 
@@ -90,44 +92,36 @@ void FillArray(vector<int> *sortingArray, int *sizeOfArray)
 {
 	int value = 0;
 	//initialize random seed
-	srand(time(NULL));
+	srand(static_cast<unsigned int>(time(NULL)));
 	for (int n = 0; n < *sizeOfArray; n++)
 	{
-		//generate secret number between 1 and 100
-		value = rand() % 100 + 1;
+		//generate secret number between -100 and 100
+		
+		value = rand() % 101 + (-50);
 		(*sortingArray)[n] = value;
 	}
 }
 
-/* Initialization of index array: from 0 to sizeOfArray */
-void FillIndexArray(vector<int> *indexArray, int *sizeOfArray)
-{
-	for (int i = 0; i < *sizeOfArray; i++)
+template <typename T>
+void SortIndexes(const vector<T> &unsortedArray) {
+
+	// initialize original index locations
+	vector<size_t> index(unsortedArray.size());
+	iota(index.begin(), index.end(), 0);
+
+	// sort indexes based on comparing values in v
+	sort(index.begin(), index.end(), 
+		[&unsortedArray](size_t i1, size_t i2) {return unsortedArray[i1] < unsortedArray[i2]; });
+
+	//print indexes
+	cout << "index after sorting: \n";
+	for (int i = 0; i < index.size(); i++)
 	{
-		(*indexArray)[i] = i;
+		cout << left << setw(6) << setfill(' ') << index[i];
 	}
+	cout << endl;
 }
 
-/* Update index array after sorting  */
-void GetIndexFromSortedArray(vector<int> *tmpArray, vector<int> *sortingArray, vector<int> *indexArray)
-{
-	vector<int> indexes((*sortingArray).size());
-	for (int i = 0; i < (*sortingArray).size(); i++) 
-	{
-		for (int j = 0; j < (*sortingArray).size(); j++)
-		{
-			//if elements are the same, update index
-			if ((*tmpArray)[j] == (*sortingArray)[i])
-			{
-				indexes[i] = j;
-				break;
-			}
-		}
-	}
-
-	*indexArray = indexes;
-	
-}
 
 /*Partition method - this is important part of quicksort method*/
 int Partition(vector<int> &sortingArray, int low, int high)
@@ -183,37 +177,33 @@ void QuickSort(vector<int> &sortingArray,int low, int high)
 
 int main()
 {
+	cout << fixed << setprecision(20);
 	/* INSERTION SORT */
 	cout << "Insertion sort \n";
 	//Create arrays for insertion sort
 	int sizeOfArray = 0;
 	InsertSizeOfArray(&sizeOfArray);
 	vector<int> sortingArray(sizeOfArray);	//array for sorted values
-	vector<int> tmpArray(sizeOfArray);		//temporary array for unsorted values
-	vector<int> indexArray(sizeOfArray);	//array for indexes
+	vector<int> unsortedArray(sizeOfArray);		//temporary array for unsorted values
 
 	//Fill first array
 	FillArray(&sortingArray, &sizeOfArray);
 	PrintResult(&sortingArray);
-	tmpArray = sortingArray;
-	//Print indexes
-	FillIndexArray(&indexArray,&sizeOfArray);
-	PrintResult(&indexArray);
+	unsortedArray = sortingArray;
 
-	cout << endl;
+	clock_t begin = clock(); // performance test start
 
 	//Insertion Sort for first array
-	clock_t begin = clock();
-
 	insertionSort(&sortingArray, &sizeOfArray);
 	
-	clock_t end = clock();
+	clock_t end = clock(); //performance test end
 	double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
 	PrintResult(&sortingArray);
+
 	//Print indexes
-	GetIndexFromSortedArray(&tmpArray, &sortingArray,&indexArray);
-	PrintResult(&indexArray);
-	cout << "Elapsed time: " << setprecision(10) << elapsed_secs * 1.0e-6 << "sec\n";
+	SortIndexes(unsortedArray);
+
+	cout << "Elapsed time: " << elapsed_secs << "sec\n";
 
 
 	/* QUICKSORT */
@@ -223,32 +213,27 @@ int main()
 	int sizeOfArray2 = 0;
 	InsertSizeOfArray(&sizeOfArray2);
 	vector<int> sortingArray2(sizeOfArray2);//array for sorted values
-	vector<int> tmpArray2(sizeOfArray2);		//temporary array for unsorted values
-	vector<int> indexArray2(sizeOfArray2);	//array for indexes
+	vector<int> unsortedArray2(sizeOfArray2);		//temporary array for unsorted values
 
 	//Fill second array
 	FillArray(&sortingArray2, &sizeOfArray2);
 	PrintResult(&sortingArray2);
-	tmpArray2 = sortingArray2;
-
-	//Print indexes
-	FillIndexArray(&indexArray2, &sizeOfArray2);
-	PrintResult(&indexArray2);
-
+	unsortedArray2 = sortingArray2;
 	cout << endl;
 
-	//Quick Sort
-	clock_t begin2 = clock();
+	
+	clock_t begin2 = clock(); //performance test start
 
+	//Quick Sort
 	QuickSort(sortingArray2, 0, sizeOfArray2-1);
 
-	clock_t end2 = clock();
+	clock_t end2 = clock(); //performance test end
 	double elapsed_secs2 = double(end2 - begin2) / CLOCKS_PER_SEC;
 	PrintResult(&sortingArray2);
 	//Print indexes
-	GetIndexFromSortedArray(&tmpArray2, &sortingArray2, &indexArray2);
-	PrintResult(&indexArray2);
-	cout << "Elapsed time: " << setprecision(10) << elapsed_secs2 * 1.0e-6 << "sec\n";
+	SortIndexes(unsortedArray2);
+
+	cout << "Elapsed time: " << elapsed_secs2 << "sec\n";
 
 	cout << endl;
 	return 0;

@@ -1,7 +1,9 @@
 ﻿  main.cpp
-c:\users\klaud\documents\github\sortinglibrary\sortinglibrary\sortinglibrary\main.cpp(26): warning C4018: '<': signed/unsigned mismatch
-c:\users\klaud\documents\github\sortinglibrary\sortinglibrary\sortinglibrary\main.cpp(93): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\klaud\documents\github\sortinglibrary\sortinglibrary\sortinglibrary\main.cpp(115): warning C4018: '<': signed/unsigned mismatch
-c:\users\klaud\documents\github\sortinglibrary\sortinglibrary\sortinglibrary\main.cpp(117): warning C4018: '<': signed/unsigned mismatch
-  LINK : C:\Users\klaud\Documents\GitHub\SortingLibrary\SortingLibrary\Debug\SortingLibrary.exe not found or not built by the last incremental link; performing full link
+c:\users\klaud\documents\github\sortinglibrary\sortinglibrary\sortinglibrary\main.cpp(28): warning C4018: '<': signed/unsigned mismatch
+c:\users\klaud\documents\github\sortinglibrary\sortinglibrary\sortinglibrary\main.cpp(118): warning C4018: '<': signed/unsigned mismatch
+  c:\users\klaud\documents\github\sortinglibrary\sortinglibrary\sortinglibrary\main.cpp(204): note: see reference to function template instantiation 'void SortIndexes<int>(const std::vector<int,std::allocator<_Ty>> &)' being compiled
+          with
+          [
+              _Ty=int
+          ]
   SortingLibrary.vcxproj -> C:\Users\klaud\Documents\GitHub\SortingLibrary\SortingLibrary\Debug\SortingLibrary.exe
