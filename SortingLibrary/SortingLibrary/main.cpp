@@ -51,8 +51,6 @@ void PrintResult(vector<int> *sortingArray)
 /* Function to sort a vector using insertion sort*/
 void insertionSort(vector<int> *sortingArray, int *sizeOfArray)
 {
-	int i, key, j = 0;
-	for (i = 1; i < *sizeOfArray; i++)
 	{
 		// Move elements of Vector[0..i-1], that are
 		// greater than key, to one position ahead
@@ -261,6 +259,7 @@ int main()
 	}
 	
 =======
+>>>>>>> Sacha
 	cout << endl;
 	return 0;
 }
