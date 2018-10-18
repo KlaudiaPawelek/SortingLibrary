@@ -17,6 +17,7 @@ Vectors are used to storing values.
 #include <string>
 #include <algorithm>
 #include <numeric>
+#include <fstream>
 
 using namespace std;
 
@@ -31,8 +32,6 @@ int IsInteger(string input)
 			return 0;
 		if (input[i] == '.')
 			bad++;
-		if (input[i] == '-')
-			bad++;
 	}
 	//check if bad contains something
 	if (bad)
@@ -46,7 +45,6 @@ void PrintResult(vector<int> *sortingArray)
 	int width = 6;
 	for (unsigned int i = 0; i < (*sortingArray).size(); i++) 
 	{
-		cout << left << setw(width) << setfill(' ') << (*sortingArray)[i];
 	}
 	cout << endl;
 }
@@ -56,18 +54,12 @@ void insertionSort(vector<int> *sortingArray, int *sizeOfArray)
 	int i, key, j = 0;
 	for (i = 1; i < *sizeOfArray; i++)
 	{
-		key = (*sortingArray)[i];
-		j = i - 1;
-
 		// Move elements of Vector[0..i-1], that are
 		// greater than key, to one position ahead
 		// of their current position
-		while (j >= 0 && (*sortingArray)[j] > key)
 		{
-			(*sortingArray)[j + 1] = (*sortingArray)[j];
 			j = j - 1;
 		}
-		(*sortingArray)[j + 1] = key;
 	}
 }
 /*Function that asks the user about the size of the vector/array*/
@@ -78,10 +70,7 @@ void InsertSizeOfArray(int *sizeOfArray)
 	string tmpSize;
 	cout << "Insert the size of the array: ";
 	getline(cin, tmpSize);
-	while (!IsInteger(tmpSize))
 	{	
-		cout << "Wrong input!" << endl;
-		cout << "Insert the size of the array: ";
 		getline(cin, tmpSize);
 	}
 	*sizeOfArray = stoi(tmpSize);
@@ -196,9 +185,9 @@ bool isSorted(vector<int> &sortingArray, int n)
 	return isSorted(sortingArray, n - 1);
 }
 
-
 int main()
 {
+<<<<<<< HEAD
 	try
 	{
 		cout << fixed << setprecision(20);
@@ -223,12 +212,15 @@ int main()
 		clock_t end = clock(); //performance test end
 		double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
 		PrintResult(&sortingArray);
+=======
+>>>>>>> Sacha
 
 		//Print indexes
 		SortIndexes(unsortedArray);
 
 		cout << "Elapsed time: " << elapsed_secs << "sec\n";
 
+<<<<<<< HEAD
 		/* QUICKSORT */
 		cout << "\nQuick sort \n";
 
@@ -268,6 +260,7 @@ int main()
 		cout << "Sorry. Something went wrong! " << e.what();
 	}
 	
+=======
 	cout << endl;
 	return 0;
 }
