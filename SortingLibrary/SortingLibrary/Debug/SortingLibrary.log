@@ -1,9 +1,21 @@
 ﻿  main.cpp
+<<<<<<< HEAD
 c:\users\klaud\documents\github\sortinglibrary\sortinglibrary\sortinglibrary\main.cpp(29): warning C4018: '<': signed/unsigned mismatch
 c:\users\klaud\documents\github\sortinglibrary\sortinglibrary\sortinglibrary\main.cpp(115): warning C4018: '<': signed/unsigned mismatch
   c:\users\klaud\documents\github\sortinglibrary\sortinglibrary\sortinglibrary\main.cpp(270): note: see reference to function template instantiation 'void SortIndexes<int>(const std::vector<int,std::allocator<_Ty>> &)' being compiled
+=======
+<<<<<<< HEAD
+c:\users\klaud\documents\github\sortinglibrary\sortinglibrary\sortinglibrary\main.cpp(28): warning C4018: '<': signed/unsigned mismatch
+c:\users\klaud\documents\github\sortinglibrary\sortinglibrary\sortinglibrary\main.cpp(118): warning C4018: '<': signed/unsigned mismatch
+  c:\users\klaud\documents\github\sortinglibrary\sortinglibrary\sortinglibrary\main.cpp(228): note: see reference to function template instantiation 'void SortIndexes<int>(const std::vector<int,std::allocator<_Ty>> &)' being compiled
+=======
+d:\documents\s.soumaille\documents\github\sortinglibrary\sortinglibrary\sortinglibrary\main.cpp(29): warning C4018: '<' : incompatibilité signed/unsigned
+d:\documents\s.soumaille\documents\github\sortinglibrary\sortinglibrary\sortinglibrary\main.cpp(115): warning C4018: '<' : incompatibilité signed/unsigned
+  d:\documents\s.soumaille\documents\github\sortinglibrary\sortinglibrary\sortinglibrary\main.cpp(199): note: voir la référence à l'instanciation de la fonction modèle 'void SortIndexes<int>(const std::vector<int,std::allocator<_Ty>> &)' en cours de compilation
+>>>>>>> Sacha
+>>>>>>> master
           with
           [
               _Ty=int
           ]
-  SortingLibrary.vcxproj -> C:\Users\klaud\Documents\GitHub\SortingLibrary\SortingLibrary\Debug\SortingLibrary.exe
+  SortingLibrary.vcxproj -> D:\Documents\s.soumaille\Documents\GitHub\SortingLibrary\SortingLibrary\Debug\SortingLibrary.exe

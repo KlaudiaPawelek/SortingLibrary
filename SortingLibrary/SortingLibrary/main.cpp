@@ -46,6 +46,7 @@ void PrintResult(vector<int> *sortingArray)
 	for (unsigned int i = 0; i < (*sortingArray).size(); i++) 
 	{
 		cout << left << setw(width) << setfill(' ') << (*sortingArray)[i];
+		cout << left << setw(6) << setfill(' ') << (*sortingArray)[i];
 	}
 	cout << endl;
 }
@@ -56,11 +57,14 @@ void insertionSort(vector<int> *sortingArray, int *sizeOfArray)
 	int j = 0;
 	while (i < *sizeOfArray)
 	{
+<<<<<<< HEAD
 		j = i;
 		// Move elements of Vector[0..i-1], that are
 		// greater than key, to one position ahead
 		// of their current position
 		while (j > 0 && (*sortingArray)[j - 1] > (*sortingArray)[j])
+=======
+>>>>>>> master
 		{
 			swap((*sortingArray)[j], (*sortingArray)[j - 1]);
 			j = j - 1;
@@ -77,7 +81,10 @@ void InsertSizeOfArray(int *sizeOfArray)
 	cout << "Insert the size of the array: ";
 	getline(cin, tmpSize);
 	while (!IsInteger(tmpSize) || tmpSize == "")
+<<<<<<< HEAD
 	{
+=======
+>>>>>>> master
 		cout << "Wrong input! Please input an integer: ";
 		getline(cin, tmpSize);
 	}
@@ -176,7 +183,6 @@ void QuickSort(vector<int> &sortingArray,int low, int high)
 /* sortingArray - insertion sort, sortingArray2 - quicksort */
 void isEmpty(vector<int> &sortingArray, vector<int> &sortingArray2)
 {
-	cout<<"Is array for insertion sort empty? "<< boolalpha<<sortingArray.empty()<<endl;
 	cout << "Is array for quicksort empty? " << boolalpha<<sortingArray.empty()<<endl;
 }
 /* Check, if array is sorted */
@@ -238,7 +244,6 @@ void PerformanceTest()
 	}
 }
 
-
 int main()
 {
 	try
@@ -270,6 +275,7 @@ int main()
 		SortIndexes(unsortedArray);
 
 		cout << "Elapsed time: " << elapsed_secs << "sec\n";
+
 
 		/* QUICKSORT */
 		cout << "\nQuick sort \n";
@@ -314,5 +320,44 @@ int main()
 	PerformanceTest();
 	
 	cout << endl;
+
+	ofstream outputFile;
+	outputFile.open("Data.txt");
+	outputFile << fixed << setprecision(10);
+	outputFile << left << setw(20) << setfill(' ') << "Size of Array";
+	outputFile << left << setw(20) << setfill(' ') << "Insertion sort";
+	outputFile << left << setw(20) << setfill(' ') << "Quick sort";
+	outputFile << endl;
+	if (outputFile.is_open()) {
+		for (int i = 0; i <= 200; i += 10)
+		{
+			sizeOfArray = i*50;
+			if (i == 0)
+			{
+				sizeOfArray = 10;
+			}
+			outputFile << left << setw(20) << setfill(' ') << sizeOfArray;
+			
+			vector<int> sortingArray(sizeOfArray);
+			FillArray(&sortingArray, &sizeOfArray);
+			
+			//Insertion Sort for first array
+			clock_t begin3 = clock(); //performance test start
+			insertionSort(&sortingArray, &sizeOfArray);
+			clock_t end3 = clock();  //performance test end
+			double elapsed_secs3 = double(end3 - begin3) / CLOCKS_PER_SEC;
+			outputFile << left << setw(20) << setfill(' ') << elapsed_secs3;
+
+			//Quick Sort
+			clock_t begin4 = clock(); //performance test start
+			QuickSort(sortingArray, 0, sizeOfArray - 1);
+			clock_t end4 = clock(); //performance test end
+			double elapsed_secs4 = double(end4 - begin4) / CLOCKS_PER_SEC;
+			outputFile << left << setw(20) << setfill(' ') << elapsed_secs4;
+
+			outputFile << endl;
+		}
+		outputFile.close();
+	}
 	return 0;
 }
