@@ -112,7 +112,7 @@ void SortIndexes(const vector<T> &unsortedArray) {
 	// sort indexes based on comparing values in v
 	sort(index.begin(), index.end(), 
 		[&unsortedArray](size_t i1, size_t i2) {return unsortedArray[i1] < unsortedArray[i2]; });
-
+	
 	//print indexes
 	cout << "index after sorting: \n";
 	for (int i = 0; i < index.size(); i++)
@@ -173,68 +173,101 @@ void QuickSort(vector<int> &sortingArray,int low, int high)
 		QuickSort(sortingArray, pi + 1, high);
 	}
 }
+/* TEST */
+
+/* Check, if array is empty */
+/* sortingArray - insertion sort, sortingArray2 - quicksort */
+void isEmpty(vector<int> &sortingArray, vector<int> &sortingArray2)
+{
+	cout<<"Is array for insertion sort empty? "<< boolalpha<<sortingArray.empty()<<endl;
+	cout << "Is array for quicksort empty? " << boolalpha<<sortingArray.empty()<<endl;
+}
+/* Check, if array is sorted */
+bool isSorted(vector<int> &sortingArray, int n)
+{
+	if (n == 1 || n == 0)
+	{
+		return 1;
+	}
+	if (sortingArray[n - 1] < sortingArray[n - 2])
+	{
+		return 0;
+	}
+	return isSorted(sortingArray, n - 1);
+}
 
 
 int main()
 {
-	cout << fixed << setprecision(20);
-	/* INSERTION SORT */
-	cout << "Insertion sort \n";
-	//Create arrays for insertion sort
-	int sizeOfArray = 0;
-	InsertSizeOfArray(&sizeOfArray);
-	vector<int> sortingArray(sizeOfArray);	//array for sorted values
-	vector<int> unsortedArray(sizeOfArray);		//temporary array for unsorted values
+	try
+	{
+		cout << fixed << setprecision(20);
+		/* INSERTION SORT */
+		cout << "Insertion sort \n";
+		//Create arrays for insertion sort
+		int sizeOfArray = 0;
+		InsertSizeOfArray(&sizeOfArray);
+		vector<int> sortingArray(sizeOfArray);	//array for sorted values
+		vector<int> unsortedArray(sizeOfArray);		//temporary array for unsorted values
 
-	//Fill first array
-	FillArray(&sortingArray, &sizeOfArray);
-	PrintResult(&sortingArray);
-	unsortedArray = sortingArray;
+		//Fill first array
+		FillArray(&sortingArray, &sizeOfArray);
+		PrintResult(&sortingArray);
+		unsortedArray = sortingArray;
 
-	clock_t begin = clock(); // performance test start
+		clock_t begin = clock(); // performance test start
 
-	//Insertion Sort for first array
-	insertionSort(&sortingArray, &sizeOfArray);
+		//Insertion Sort for first array
+		insertionSort(&sortingArray, &sizeOfArray);
+
+		clock_t end = clock(); //performance test end
+		double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+		PrintResult(&sortingArray);
+
+		//Print indexes
+		SortIndexes(unsortedArray);
+
+		cout << "Elapsed time: " << elapsed_secs << "sec\n";
+
+		/* QUICKSORT */
+		cout << "\nQuick sort \n";
+
+		//Create arrays for quicksort
+		int sizeOfArray2 = 0;
+		InsertSizeOfArray(&sizeOfArray2);
+		vector<int> sortingArray2(sizeOfArray2);//array for sorted values
+		vector<int> unsortedArray2(sizeOfArray2);		//temporary array for unsorted values
+
+		//Fill second array
+		FillArray(&sortingArray2, &sizeOfArray2);
+		PrintResult(&sortingArray2);
+		unsortedArray2 = sortingArray2;
+		cout << endl;
+
+
+		clock_t begin2 = clock(); //performance test start
+
+		//Quick Sort
+		QuickSort(sortingArray2, 0, sizeOfArray2 - 1);
+
+		clock_t end2 = clock(); //performance test end
+		double elapsed_secs2 = double(end2 - begin2) / CLOCKS_PER_SEC;
+		PrintResult(&sortingArray2);
+		//Print indexes
+		SortIndexes(unsortedArray2);
+
+		cout << "Elapsed time: " << elapsed_secs2 << "sec\n";
+
+		cout << endl << "TEST" << endl;
+		isEmpty(sortingArray, sortingArray2);
+		cout << "\nIs array for insertion sort sorted? " << boolalpha << isSorted(sortingArray, sortingArray.size());
+		cout << "\nIs array for quicksort sorted? " << boolalpha << isSorted(sortingArray2, sortingArray2.size());
+	}
+	catch (exception &e)
+	{
+		cout << "Sorry. Something went wrong! " << e.what();
+	}
 	
-	clock_t end = clock(); //performance test end
-	double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
-	PrintResult(&sortingArray);
-
-	//Print indexes
-	SortIndexes(unsortedArray);
-
-	cout << "Elapsed time: " << elapsed_secs << "sec\n";
-
-
-	/* QUICKSORT */
-	cout << "\nQuick sort \n";
-
-	//Create arrays for quicksort
-	int sizeOfArray2 = 0;
-	InsertSizeOfArray(&sizeOfArray2);
-	vector<int> sortingArray2(sizeOfArray2);//array for sorted values
-	vector<int> unsortedArray2(sizeOfArray2);		//temporary array for unsorted values
-
-	//Fill second array
-	FillArray(&sortingArray2, &sizeOfArray2);
-	PrintResult(&sortingArray2);
-	unsortedArray2 = sortingArray2;
-	cout << endl;
-
-	
-	clock_t begin2 = clock(); //performance test start
-
-	//Quick Sort
-	QuickSort(sortingArray2, 0, sizeOfArray2-1);
-
-	clock_t end2 = clock(); //performance test end
-	double elapsed_secs2 = double(end2 - begin2) / CLOCKS_PER_SEC;
-	PrintResult(&sortingArray2);
-	//Print indexes
-	SortIndexes(unsortedArray2);
-
-	cout << "Elapsed time: " << elapsed_secs2 << "sec\n";
-
 	cout << endl;
 	return 0;
 }
