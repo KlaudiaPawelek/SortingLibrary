@@ -17,6 +17,7 @@ Vectors are used to storing values.
 #include <string>
 #include <algorithm>
 #include <numeric>
+#include <fstream>
 
 using namespace std;
 
@@ -30,8 +31,6 @@ int IsInteger(string input)
 		if (!isdigit(input[i]) && input[i] != '.')
 			return 0;
 		if (input[i] == '.')
-			bad++;
-		if (input[i] == '-')
 			bad++;
 	}
 	//check if bad contains something
@@ -53,21 +52,20 @@ void PrintResult(vector<int> *sortingArray)
 /* Function to sort a vector using insertion sort*/
 void insertionSort(vector<int> *sortingArray, int *sizeOfArray)
 {
-	int i, key, j = 0;
-	for (i = 1; i < *sizeOfArray; i++)
+	int i = 1;
+	int j = 0;
+	while (i < *sizeOfArray)
 	{
-		key = (*sortingArray)[i];
-		j = i - 1;
-
+		j = i;
 		// Move elements of Vector[0..i-1], that are
 		// greater than key, to one position ahead
 		// of their current position
-		while (j >= 0 && (*sortingArray)[j] > key)
+		while (j > 0 && (*sortingArray)[j - 1] > (*sortingArray)[j])
 		{
-			(*sortingArray)[j + 1] = (*sortingArray)[j];
+			swap((*sortingArray)[j], (*sortingArray)[j - 1]);
 			j = j - 1;
 		}
-		(*sortingArray)[j + 1] = key;
+		i++;
 	}
 }
 /*Function that asks the user about the size of the vector/array*/
@@ -78,10 +76,9 @@ void InsertSizeOfArray(int *sizeOfArray)
 	string tmpSize;
 	cout << "Insert the size of the array: ";
 	getline(cin, tmpSize);
-	while (!IsInteger(tmpSize))
-	{	
-		cout << "Wrong input!" << endl;
-		cout << "Insert the size of the array: ";
+	while (!IsInteger(tmpSize) || tmpSize == "")
+	{
+		cout << "Wrong input! Please input an integer: ";
 		getline(cin, tmpSize);
 	}
 	*sizeOfArray = stoi(tmpSize);
@@ -195,6 +192,51 @@ bool isSorted(vector<int> &sortingArray, int n)
 	}
 	return isSorted(sortingArray, n - 1);
 }
+/* Performance test: measure time and save data in file */
+/* Function is called at the end of the main function */
+/* I leave my small performance test in main too, because it looks nice in the console ;-) */
+void PerformanceTest()
+{
+	ofstream outputFile;
+	int sizeOfArray = 0;
+	outputFile.open("Data.txt");
+	outputFile << fixed << setprecision(10);
+	outputFile << left << setw(20) << setfill(' ') << "Size of Array";
+	outputFile << left << setw(20) << setfill(' ') << "Insertion sort";
+	outputFile << left << setw(20) << setfill(' ') << "Quick sort";
+	outputFile << endl;
+	if (outputFile.is_open()) {
+		for (int i = 0; i <= 200; i += 10)
+		{
+			sizeOfArray = i * 50;
+			if (i == 0)
+			{
+				sizeOfArray = 10;
+			}
+			outputFile << left << setw(20) << setfill(' ') << sizeOfArray;
+
+			vector<int> sortingArray(sizeOfArray);
+			FillArray(&sortingArray, &sizeOfArray);
+
+			//Insertion Sort for first array
+			clock_t begin3 = clock(); //performance test start
+			insertionSort(&sortingArray, &sizeOfArray);
+			clock_t end3 = clock();  //performance test end
+			double elapsed_secs3 = double(end3 - begin3) / CLOCKS_PER_SEC;
+			outputFile << left << setw(20) << setfill(' ') << elapsed_secs3;
+
+			//Quick Sort
+			clock_t begin4 = clock(); //performance test start
+			QuickSort(sortingArray, 0, sizeOfArray - 1);
+			clock_t end4 = clock(); //performance test end
+			double elapsed_secs4 = double(end4 - begin4) / CLOCKS_PER_SEC;
+			outputFile << left << setw(20) << setfill(' ') << elapsed_secs4;
+
+			outputFile << endl;
+		}
+		outputFile.close();
+	}
+}
 
 
 int main()
@@ -267,6 +309,9 @@ int main()
 	{
 		cout << "Sorry. Something went wrong! " << e.what();
 	}
+
+	//SACHA'S PERFORMANCE TEST
+	PerformanceTest();
 	
 	cout << endl;
 	return 0;
