@@ -1,2 +1,2 @@
 # SortingLibrary
-Excercise 1 Requirements Analysis
+Short excercise for Requirements Analysis and Software Testing course.
